@@ -1,5 +1,6 @@
 package com.spacmanager.spaccore.config;
 
+//Client->Service-> Worker
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.WorkerFactory;

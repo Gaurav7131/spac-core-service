@@ -7,9 +7,9 @@ import io.temporal.workflow.WorkflowMethod;
 
 @WorkflowInterface
 public interface SpacLifecycleWorkflow {
-    @WorkflowMethod
+    @WorkflowMethod // Entry
     void startSpacLifecycle(Spac spac);
 
-    @SignalMethod
+    @SignalMethod // reacts to external signal must have void return type
     void signalIpoComplete();
 }

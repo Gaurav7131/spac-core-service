@@ -1,51 +1,49 @@
 package com.spacmanager.spaccore.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import lombok.*; // Importing all lombok annotations
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "spacs")
+@Table(name = "spac", indexes = @Index(name = "idx_ticker", columnList = "tickerSymbol"))
 @Getter
-@Setter
+@Setter // Added this so setCurrentStage(SpacStage) is generated
+@NoArgsConstructor
+@AllArgsConstructor // Added for convenience
 public class Spac {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
+
+    public enum SpacStage {
+        PRE_IPO, IPO, DE_SPAC, COMPLETED, FORMATION
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SpacStage currentStage;
+
+    @Column(nullable = false)
+    private String tickerSymbol;
+
+    private String name;
+    private String targetSector;
+
+    @Column(precision = 19, scale = 4)
+    private BigDecimal trustValue;
 
     @Version
     private Long version;
 
-    private String name;
-    private String tickerSymbol;
-    private String targetSector;
-
-    // precision and scale=4 standard for financial systems
-    @Column(precision = 19, scale = 4)
-    private BigDecimal trustValue;
-
-    private String currentStage;
-
-    // 1. These define the database columns
-    @Column(name = "created_at", updatable = false)
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    // 2. This sets the date automatically right before a row is CREATED
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    // 3. This updates the date automatically right before a row is UPDATED
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 }

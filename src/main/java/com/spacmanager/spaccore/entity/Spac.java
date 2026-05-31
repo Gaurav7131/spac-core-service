@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "spac", indexes = @Index(name = "idx_ticker", columnList = "tickerSymbol"))
+@Table(name = "spacs", indexes = @Index(name = "idx_ticker", columnList = "tickerSymbol"))
 @Getter
 @Setter // Added this so setCurrentStage(SpacStage) is generated
 @NoArgsConstructor

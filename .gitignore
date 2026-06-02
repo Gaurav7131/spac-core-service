@@ -6,7 +6,6 @@ target/
 
 # Secrets
 **/application.properties
-**/application.yml
 **/certs/
 
 ### STS ###

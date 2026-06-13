@@ -68,8 +68,12 @@ public class SpacController {
     // NEW ENDPOINT: Triggers the background simulation engine
     @PostMapping("/trigger-simulation/{ticker}")
     public ResponseEntity<String> triggerSimulation(@PathVariable String ticker) {
-        // Publishes the message to the "spac-simulations" Kafka topic
-        kafkaTemplate.send("spac-simulations", "Calculate dilution for: " + ticker);
+        // Construct a valid JSON string
+        String jsonPayload = String.format("{\"ticker\": \"%s\"}", ticker);
+
+        // Publish the JSON string to Kafka
+        kafkaTemplate.send("spac-simulations", jsonPayload);
+
         return ResponseEntity.ok("Simulation job submitted for " + ticker);
     }
 

@@ -21,7 +21,7 @@ public class Spac {
     private Long id;
 
     public enum SpacStage {
-        PRE_IPO, IPO, DE_SPAC, COMPLETED, FORMATION
+        FORMATION, IPO_COMPLETE, MERGED, REFUNDED
     }
 
     @Enumerated(EnumType.STRING)

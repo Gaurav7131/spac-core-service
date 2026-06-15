@@ -10,6 +10,10 @@ public interface SpacLifecycleWorkflow {
     @WorkflowMethod // Entry
     void startSpacLifecycle(Spac spac);
 
-    @SignalMethod // reacts to external signal must have void return type
+    @SignalMethod // reacts to external signal must have void return type Signal to transition
+                  // from Formation to IPO_COMPLETE
     void signalIpoComplete();
+
+    @SignalMethod // Signal to transition to MERGED (based on stakeholder vote)
+    void signalStakeHolderVote(String decision);// Approve or Reject
 }

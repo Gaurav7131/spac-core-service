@@ -12,4 +12,10 @@ public interface SpacActivity {
 
     @ActivityMethod // Second job in the menu
     void updateSpacStage(Long spacId, String newStage);
+
+    @ActivityMethod
+    void processRefund(Long spacId, String reason);
+
+    @ActivityMethod
+    void executeMerger(Long spacId);
 }

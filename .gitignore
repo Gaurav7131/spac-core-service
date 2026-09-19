@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 # Secrets
-**/application.properties
+**/orginal application.properties
 **/certs/
 
 ### STS ###
